@@ -8,23 +8,27 @@ public class BinaryTreeSearch {
         if (node.getValue() == nodeValue) {
             return depth;
         } else {
-            if (nodeValue < node.getValue()) {
-                BinaryTreeNode<Integer> left = node.getLeft();
-                if (left == null) {
-                    throw new TreeException("Value not found in tree!");
-                } else {
-                    return 1 + calculateDepth(left, nodeValue);
-                }
-            } else {
-                BinaryTreeNode<Integer> right = node.getRight();
-                if (right == null) {
-                    throw new TreeException("Value not found in tree!");
-                } else {
-                    return 1 + calculateDepth(right, nodeValue);
-                }
-            }
+            return treeByValue(node, nodeValue);
         }
     }
     // end::calculateDepth[]
-
+    
+    public static int treeByValue(BinaryTreeNode<Integer> t, int v) {
+    	BinaryTreeNode<Integer> binary = getChildNode(t, v);
+    	if(binary == null) {
+    		 throw new TreeException("Value not found in tree!");
+    	} else {
+    		return 1 + calculateDepth(binary, v);
+    	}
+    }
+    
+    public static BinaryTreeNode<Integer> getChildNode(BinaryTreeNode<Integer> n, int v) {
+    	if (v < n.getValue()) {
+    		return n.getLeft();
+    	} else {
+    		return n.getRight();
+    	}
+    	
+    }
+    
 }
