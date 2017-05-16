@@ -6,6 +6,9 @@ public class BoardFactory {
 	private Board board;
 	private int width;
 	private int height;
+	private int dirX;
+	private int dirY;
+	
 	
 	
 	public BoardFactory(Square[][] grid) {
@@ -25,7 +28,9 @@ public class BoardFactory {
             for (int y = 0; y < height; y++) {
                 Square square = grid[x][y];
                 for (Direction dir : Direction.values()) {
-                	setDir(square, dir, x, y);
+                	this.dirX = getDir(dir.getDeltaX(), x);
+                	this.dirY = getDir(dir.getDeltaY(), y);
+                	setSquare(square, dir);
                 }
             }
         }
@@ -34,11 +39,14 @@ public class BoardFactory {
     }
     // end::createBoard[]
     
-    private void setDir(Square square, Direction dir, int x, int y) {
-    	 int dirX = (width + x + dir.getDeltaX()) % width;
-         int dirY = (height + y + dir.getDeltaY()) % height;
+    private void setSquare(Square square, Direction dir) {
          Square neighbour = grid[dirX][dirY];
          square.link(neighbour, dir);
+    }
+    
+    
+    private int getDir(int delta, int n) {
+    	return (width + n + delta) % width;
     }
     
 }
