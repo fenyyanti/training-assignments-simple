@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.util.List;
 
 public class BoardPanel {
+	
+
     @SuppressWarnings("unused")
     // tag::render[]
     /**
@@ -23,17 +25,17 @@ public class BoardPanel {
      * @param h
      *            The height of this square (in pixels).
      */
-    private void render(Square square, Graphics g, int x, int y, int w, int h) {
-        square.getSprite().draw(g, x, y, w, h);
+    private void render(Square square, Graphics g, Rectangle r) {
+        square.getSprite().draw(g, r);
         for (Unit unit : square.getOccupants()) {
-            unit.getSprite().draw(g, x, y, w, h);
+            unit.getSprite().draw(g, r);
         }
     }
     // end::render[]
 
     private class Sprite {
         @SuppressWarnings("unused")
-        public void draw(Graphics g, int x, int y, int w, int h) {
+        public void draw(Graphics g, Rectangle r) {
 
         }
     }
